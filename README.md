@@ -11,11 +11,3 @@ understand how to create the basic structure of a web application, style it, and
 - <a href="https://github.com/Learning-Fuze/calculator/tree/v.1#design">View Design</a>
 - <a href="https://github.com/Learning-Fuze/calculator/tree/v.1#assignments---aka-criteria-for-success-on-this-version-of-the-project">View Assignments</a>
 
-## Version 0.5
-#### Description
-Version 0.5 starts where v.1 left off with adding in the delete functionality. When clicking on the delete button we need
-to add an event handler that will remove the current row from the DOM only after we have successfully removed the object
-from the array.
-
-- <a href="https://github.com/Learning-Fuze/SGT/tree/v.5#getting-started">Getting Started</a>
-- <a href="https://github.com/Learning-Fuze/SGT/tree/v.5#scope">View Scope</a>
