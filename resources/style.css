@@ -1,5 +1,6 @@
 body {
   font-size: 0;
+  background-color: #d3d9e8;
 }
 
 body * {
@@ -64,4 +65,7 @@ sup {
   height: 100%;
   background-color: #99e0f0;
   border: 6px solid gray;
+  color: gray;
+  font-size: 2rem;
+  text-align: right;
 }
