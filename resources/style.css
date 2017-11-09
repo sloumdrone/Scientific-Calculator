@@ -1,49 +1,62 @@
 body {
   font-size: 0;
   background-color: #d3d9e8;
+  height: 100vh;
+  width: 100vw;
 }
 
 body * {
   box-sizing: border-box;
   border-radius: 5px;
+  user-select: none;
 }
 
 .container {
   margin: 5% auto;
-  width: 400px;
+  width: 800px;
+  position: relative;
+  /*text-align: center;*/
 }
 
-sup {
-  font-size: 1rem;
-}
 
-.container > .row {
+.calc-body > .row:first-child {
   width: 400px;
   position: relative;
-  left: -35px;
   border: 6px solid gray;
-  box-shadow: -10px -5px 0px blue;
   z-index: 1;
 }
 
 .calc-body {
+  display: inline-block;
   width: 400px;
   border: 6px solid gray;
   background-color: gray;
-  box-shadow: -10px -5px 0px blue;
-  z-index: 0;
+  z-index: 1;
+  transition: visibility 0s;
 }
+
+.secondary-body {
+  display: inline-block;
+  visibility: hidden;
+  width: 200px;
+  border: 6px solid gray;
+  background-color: gray;
+  z-index: 0;
+  opacity: 0;
+  transition: visibility 1s, opacity 1s;
+}
+
 
 .row {
   height: 100px;
   width: 100%;
 }
 
-.button:hover {
+.button:hover, .button2:hover {
   border-top: 4px solid gray;
   border-bottom: 2px solid gray;
   border-radius: 10%;
-  background: linear-gradient(beige, #d8d8bf);
+  filter: brightness(0.95);
 }
 
 .button {
@@ -51,13 +64,62 @@ sup {
   height: 100%;
   text-align: center;
   border: 2px solid gray;
-  background-color: beige;
   color: #737070;
   display: inline-block;
   font-size: 2rem;
   font-weight: bold;
   vertical-align: bottom;;
   padding-top: 7%;
+  cursor: pointer;
+}
+
+.button2 {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  border: 2px solid gray;
+  color: #737070;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+  vertical-align: bottom;;
+  padding-top: 7%;
+  cursor: pointer;
+}
+
+.history-container {
+  display: inline-block;
+  visibility: hidden;
+  width: 200px;
+  border: 6px solid gray;
+  background-color: gray;
+  z-index: 0;
+  opacity: 0;
+  transition: visibility 1s, opacity 1s;
+}
+
+.num {
+    background-color: beige;
+}
+
+.op {
+  background-color: #a9a9f0;
+}
+
+.calc {
+  background-color: #a9f0b2;
+}
+
+.fun {
+  background-color: #a8bff0;
+}
+
+.clr, .ext, .hst {
+  background-color: #f0a9e7;
+}
+
+.flip, .dec {
+  background-color: #f0eea9;
 }
 
 .display {
@@ -68,4 +130,6 @@ sup {
   color: gray;
   font-size: 2rem;
   text-align: right;
+  padding: 4%;
+  font-family: 'Share Tech Mono', monospace;
 }
