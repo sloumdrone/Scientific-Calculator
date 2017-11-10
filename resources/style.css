@@ -1,8 +1,6 @@
 body {
   font-size: 0;
   background-color: #d3d9e8;
-  height: 100vh;
-  width: 100vw;
 }
 
 body * {
@@ -12,10 +10,11 @@ body * {
 }
 
 .container {
-  margin: 5% auto;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%);
   width: 800px;
-  position: relative;
-  /*text-align: center;*/
 }
 
 
@@ -23,7 +22,6 @@ body * {
   width: 400px;
   position: relative;
   border: 6px solid gray;
-  z-index: 1;
 }
 
 .calc-body {
@@ -31,8 +29,6 @@ body * {
   width: 400px;
   border: 6px solid gray;
   background-color: gray;
-  z-index: 1;
-  transition: visibility 0s;
 }
 
 .secondary-body {
@@ -59,7 +55,7 @@ body * {
   filter: brightness(0.95);
 }
 
-.button {
+.button, .button2 {
   width: 25%;
   height: 100%;
   text-align: center;
@@ -75,16 +71,6 @@ body * {
 
 .button2 {
   width: 50%;
-  height: 100%;
-  text-align: center;
-  border: 2px solid gray;
-  color: #737070;
-  display: inline-block;
-  font-size: 2rem;
-  font-weight: bold;
-  vertical-align: bottom;;
-  padding-top: 7%;
-  cursor: pointer;
 }
 
 .history-container {
@@ -95,7 +81,31 @@ body * {
   background-color: gray;
   z-index: 0;
   opacity: 0;
-  transition: visibility 1s, opacity 1s;
+  transition: visibility 2s, opacity 2s;
+  vertical-align: bottom;
+}
+
+.h-row {
+  height: 50px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.h-row:nth-child(odd){
+  background-color: #ace7ff;
+}
+
+.h-row:nth-child(even){
+  background-color: #b7f8d5;
+}
+
+.title-row {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 50px;
+  color: skyblue;
 }
 
 .num {
@@ -124,7 +134,7 @@ body * {
 
 .display {
   width: 100%;
-  height: 100%;
+  height: 150px;
   background-color: #99e0f0;
   border: 6px solid gray;
   color: gray;
@@ -132,4 +142,25 @@ body * {
   text-align: right;
   padding: 4%;
   font-family: 'Share Tech Mono', monospace;
+  /*overflow: scroll;*/
+}
+
+.display::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.display::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.display::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
 }

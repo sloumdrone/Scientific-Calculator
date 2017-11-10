@@ -7,32 +7,29 @@ var canDecimal = true;
 var calcPressed = false;
 
 function initialize(){
-  $('.num').on('click',handleNumClicks);
-  $('.op').on('click',handleOpClicks);
-  $('.dec').on('click',handleDecClicks);
-  $('.calc').on('click',handleCalc);
-  $('.flip').on('click',handleFlip);
-  $('.clr').on('click',clearCalc);
-  $('.ext').on('click',function(){
-    if ($('.secondary-body').css('visibility') === 'hidden'){
-      $('.secondary-body').css({'visibility':'visible','opacity':'1'});
-    } else {
-      $('.secondary-body').css({'visibility':'hidden','opacity':'0'});
-    }
-  });
-  $('body').on('keypress',handleKeyInput);
+  routeInputClicks();
 }
 
 function handleNumClicks(){
+  //start new calc if num was pressed after equals without an op first
+  if (calcPressed){
+    calcArr = [];
+  }
   calcPressed = false;
+
+  var currentNum = $(this).text();
+  if (currentNum === 'π'){
+    currentNum = Math.PI;
+  }
+
   if (calcArr[0]){
     if (!isNaN(calcArr[calcArr.length-1]) || calcArr[calcArr.length-1][calcArr[calcArr.length-1].length-1] === '.'){
-      calcArr[calcArr.length-1] += $(this).text();
+      calcArr[calcArr.length-1] += currentNum;
     } else {
-      calcArr.push($(this).text());
+      calcArr.push(currentNum);
     }
   } else {
-    calcArr.push($(this).text());
+    calcArr.push(currentNum);
   }
   $('.display').text(calcArr.join(' '));
 }
@@ -77,6 +74,7 @@ function handleDecClicks(){
 function handleCalc(){
   canDecimal = true;
 
+
   //Allow for repeat = operation
   if (!calcPressed){
     memory = calcArr.slice(calcArr.length - 2,calcArr.length);
@@ -99,7 +97,7 @@ function handleCalc(){
   }
 
   calcHistory.unshift(calcArr.join(' '));
-
+  buildHistory();
   runCalc()
 }
 
@@ -255,5 +253,45 @@ function handleKeyInput(){
     case 61: // =
       $('.calc-body .row:nth-child(6) .calc').click();
       break;
+  }
+}
+
+
+function routeInputClicks(){
+  $('.num').on('click',handleNumClicks);
+  $('.op').on('click',handleOpClicks);
+  $('.dec').on('click',handleDecClicks);
+  $('.calc').on('click',handleCalc);
+  $('.flip').on('click',handleFlip);
+  $('.clr').on('click',clearCalc);
+  $('.ext').on('click',function(){
+    if ($('.secondary-body').css('visibility') === 'hidden'){
+      $(this).text('>>');
+      $('.secondary-body').css({'visibility':'visible','opacity':'1'});
+      $('.history-container').css({'visibility':'visible','opacity':'1'});
+    } else {
+      $(this).text('<<');
+      $('.secondary-body').css({'visibility':'hidden','opacity':'0'});
+      $('.history-container').css({'visibility':'hidden','opacity':'0'});
+    }
+  });
+
+  $('.h-row.button').dblclick(loadFromHistory);
+  $('body').on('keypress',handleKeyInput);
+}
+
+function loadFromHistory(){
+  var item = $(this).text();
+  console.log(item);
+  calcArr = item.split(' ');
+  $('.display').text(item);
+}
+
+function buildHistory(){
+  for (var i = 2; i < 9; i++){
+    if (i > calcHistory.length+1){
+      break;
+    }
+    $('.h-row:nth-child('+i+')').text(calcHistory[i-2]);
   }
 }
