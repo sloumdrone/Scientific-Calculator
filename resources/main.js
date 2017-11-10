@@ -56,8 +56,21 @@ function handleOpClicks(){
     $('.display').text('0');
   }
   canDecimal = true;
-
 }
+
+function handleFunctions(){
+  calcPressed = false;
+
+  if (!isNaN(calcArr[calcArr.length-1])){
+    calcArr[calcArr.length-1] = $(this).text();
+  } else {
+    calcArr.push($(this).text());
+  }
+  $('.display').text(calcArr.join(' '));
+
+  canDecimal = true;
+}
+
 
 function handleDecClicks(){
   calcPressed = false;
@@ -92,9 +105,9 @@ function handleCalc(){
   }
 
   //remove entry operators
-  if(isNaN(calcArr[0])){
-    calcArr.shift();
-  }
+  // if(isNaN(calcArr[0])){
+  //   calcArr.shift();
+  // }
 
   calcHistory.unshift(calcArr.join(' '));
   buildHistory();
@@ -105,10 +118,26 @@ function handleCalc(){
 function runCalc(){
   var pos;
   var val;
+  var func = false;
 
   //begin recursive calculation
   if (calcArr.length >= 2){
-    if (calcArr.indexOf('^') >= 0){
+    if (calcArr.findIndex(checkFunctions) >= 0){
+      func = true;
+      pos = calcArr.findIndex(checkFunctions);
+      if (calcArr[pos] === 'sin:'){
+        val = calcSin(calcArr[pos+1]);
+      } else if (calcArr[pos] === 'cos:'){
+        val = calcCos(calcArr[pos+1]);
+      } else if (calcArr[pos] === 'tan:'){
+
+        val = calcTan(calcArr[pos+1]);
+      } else if (calcArr[pos] === '√:'){
+        val = calcSqrt(calcArr[pos+1]);
+      } else if (calcArr[pos] === 'log:'){
+        val = calcLog(calcArr[pos+1]);
+      }
+    } else if (calcArr.indexOf('^') >= 0){
       pos = calcArr.indexOf('^');
       val = calcExponent(calcArr[pos-1],calcArr[pos+1]);
     } else if (calcArr.findIndex(checkMultiplyOrDivide) >= 0){
@@ -126,7 +155,12 @@ function runCalc(){
         val = calcSubtract(calcArr[pos-1],calcArr[pos+1]);
       }
     }
-    calcArr.splice(pos-1,3,val);
+    if (func){
+      calcArr.splice(pos,2,val);
+    } else {
+      calcArr.splice(pos-1,3,val);
+    }
+
     runCalc();
   } else {
     //return calculation
@@ -157,12 +191,24 @@ function clearCalc(){
   }
 }
 
-function checkMultiplyOrDivide(element){
-  return element === '/' || element === 'x';
+function calcSin(num1){
+  return Math.sin(num1);
 }
 
-function checkAddOrSubtract(element){
-  return element === '+' || element === '-';
+function calcCos(num1){
+  return Math.cos(num1);
+}
+
+function calcTan(num1){
+  return Math.tan(num1);
+}
+
+function calcSqrt(num1){
+  return Math.sqrt(num1);
+}
+
+function calcLog(num1){
+  return Math.log(num1);
 }
 
 function calcExponent(num1,num2){
@@ -183,6 +229,18 @@ function calcAdd(num1,num2){
 
 function calcSubtract(num1,num2){
   return num1 - num2;
+}
+
+function checkMultiplyOrDivide(element){
+  return element === '/' || element === 'x';
+}
+
+function checkAddOrSubtract(element){
+  return element === '+' || element === '-';
+}
+
+function checkFunctions(element){
+  return element === 'sin:' || element === 'cos:' || element === 'tan:' || element === '√:' || element === 'log:';
 }
 
 
@@ -262,6 +320,7 @@ function routeInputClicks(){
   $('.op').on('click',handleOpClicks);
   $('.dec').on('click',handleDecClicks);
   $('.calc').on('click',handleCalc);
+  $('.fun').on('click',handleFunctions);
   $('.flip').on('click',handleFlip);
   $('.clr').on('click',clearCalc);
   $('.ext').on('click',function(){
