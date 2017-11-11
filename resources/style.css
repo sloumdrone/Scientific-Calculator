@@ -11,13 +11,24 @@ body * {
 
 div span {
   font-size: 1.25rem;
-  color: green;
-  padding: 0 4px;
+  color: #7278ff;
+  padding: 0 4%;
+  margin-right: 4px;
   border: 1px solid silver;
-  box-shadow: 2px 2px 4px black;
-  background-color: white;
+  box-shadow: 2px 2px 4px #3c3737;
+  background-color: #fcffe6;
   cursor: pointer;
   user-select: none;
+  transition-duration: 1s;
+  float: right;
+}
+
+div span:hover {
+  background-color: #abf5a4;
+  color: #4149f2;
+  border: 1px solid black;
+
+
 }
 
 .container {

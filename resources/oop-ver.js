@@ -44,16 +44,25 @@ var Model = function(){
     }
     this.calcPressed = false;
 
+    var specialNumPressed = false;
     var currentNum = $(event.target).text();
     if (currentNum === 'π'){
       currentNum = Math.PI;
+      specialNumPressed = true;
     } else if (currentNum === 'E'){
       currentNum = Math.E;
+      specialNumPressed = true;
     }
+
 
     if (this.calcArr[0]){
       if (!isNaN(this.calcArr[this.calcArr.length-1]) || this.calcArr[this.calcArr.length-1][this.calcArr[this.calcArr.length-1].length-1] === '.'){
-        this.calcArr[this.calcArr.length-1] += currentNum;
+        if (specialNumPressed){
+          this.calcArr.push('x');
+          this.calcArr.push(currentNum);
+        } else {
+          this.calcArr[this.calcArr.length-1] += currentNum;
+        }
       } else {
         this.calcArr.push(currentNum);
       }
@@ -147,7 +156,8 @@ var Model = function(){
     if (this.calcArr.length >= 2){
       if (this.calcArr.findIndex(controller.checkFunctions) >= 0){
         func = true;
-        pos = this.calcArr.findIndex(controller.checkFunctions);
+        pos = this.calcArr.slice().reverse().findIndex(controller.checkFunctions);
+        pos = this.calcArr.length - 1 - pos;
         if (this.calcArr[pos] === 'sin:'){
           val = controller.calcSin(this.calcArr[pos+1]);
         } else if (this.calcArr[pos] === 'cos:'){
