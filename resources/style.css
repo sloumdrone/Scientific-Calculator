@@ -9,6 +9,11 @@ body * {
   user-select: none;
 }
 
+div span {
+  font-size: 1.25rem;
+  color: green;
+}
+
 .container {
   position: absolute;
   top: 5%;
@@ -81,7 +86,7 @@ body * {
   background-color: gray;
   z-index: 0;
   opacity: 0;
-  transition: visibility 2s, opacity 2s;
+  transition: visibility 1s, opacity 1s;
   vertical-align: bottom;
 }
 

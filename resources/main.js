@@ -20,6 +20,8 @@ function handleNumClicks(){
   var currentNum = $(this).text();
   if (currentNum === 'π'){
     currentNum = Math.PI;
+  } else if (currentNum === 'E'){
+    currentNum = Math.E;
   }
 
   if (calcArr[0]){
@@ -104,11 +106,7 @@ function handleCalc(){
     calcArr.push(calcArr[calcArr.length-2]);
   }
 
-  //remove entry operators
-  // if(isNaN(calcArr[0])){
-  //   calcArr.shift();
-  // }
-
+  //Add to history
   calcHistory.unshift(calcArr.join(' '));
   buildHistory();
   runCalc()
@@ -161,7 +159,7 @@ function runCalc(){
       calcArr.splice(pos-1,3,val);
     }
 
-    runCalc();
+    return runCalc();
   } else {
     //return calculation
 
