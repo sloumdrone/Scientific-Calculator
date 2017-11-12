@@ -1,6 +1,8 @@
 body {
   font-size: 0;
   background-color: #d3d9e8;
+  margin: 0;
+  padding: 0;
 }
 
 body * {
@@ -11,7 +13,7 @@ body * {
 
 div span {
   font-size: 1.25rem;
-  color: #7278ff;
+  color: #808080;
   padding: 0 4%;
   margin-right: 4px;
   border: 1px solid silver;
@@ -21,14 +23,12 @@ div span {
   user-select: none;
   transition-duration: 1s;
   float: right;
+  width:52px;
 }
 
 div span:hover {
-  background-color: #abf5a4;
-  color: #4149f2;
+  background-color: #f0eea9;
   border: 1px solid black;
-
-
 }
 
 .container {
@@ -169,19 +169,100 @@ div span:hover {
   overflow: auto;
 }
 
-.display::-webkit-scrollbar-track {
+.display::-webkit-scrollbar-track, .modal-content::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 10px;
 	background-color: #F5F5F5;
 }
 
-.display::-webkit-scrollbar {
+.display::-webkit-scrollbar, .modal-content::-webkit-scrollbar {
 	width: 12px;
 	background-color: #F5F5F5;
 }
 
-.display::-webkit-scrollbar-thumb {
+.display::-webkit-scrollbar-thumb, .modal-content::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #555;
+}
+
+.modal-curtain {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0,0,0,0.3);
+  cursor: default;
+  transition-duration: 0.75s;
+}
+
+.modal-close {
+  background-color: #f0bda8;
+  color: gray;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid gray;
+  padding: 0 6px;
+}
+
+.modal-body {
+  width: 60%;
+  height: 80%;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: none;
+  cursor: default;
+}
+
+.title-bar {
+  border: 1px solid silver;
+  background-color: #f0eea9;
+  color: gray;
+  user-select: none;
+  cursor: default;
+  overflow: hidden;
+  padding: 1%;
+  text-align: center;
+}
+
+.modal-content {
+  border: 1px solid silver;
+  background-color: #a8bff0;
+  color: gray;
+  overflow-y: scroll;
+  padding: 5%;
+  height: 95%;
+  line-height: 1.5;
+}
+
+#info-button {
+  padding: 10px 20px;
+  margin: 1% auto;
+  background-color: #cef8ff;
+  color: grey;
+  cursor: pointer;
+  user-select: none;
+  display: block;
+  text-align: center;
+  font-size: 1.15rem;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  border: 3px solid gray;
+  transition-duration: 0.25s;
+  box-shadow: 0px 0px 0px transparent;
+}
+
+#info-button:hover {
+  top: 80.10%;
+  box-shadow: 0px 2px 6px slategray;
 }

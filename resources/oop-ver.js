@@ -26,9 +26,9 @@ var Model = function(){
     this.calcPressed = false;
     if (this.calcArr[0]){
       if (isNaN(this.calcArr[this.calcArr.length-1]) && this.calcArr[0] !== 'ERROR'){
-        this.calcArr[this.calcArr.length-1] = $(event.target).text();
+          this.calcArr[this.calcArr.length-1] = $(event.target).text();
       } else if (this.calcArr[0] !== 'ERROR'){
-        this.calcArr.push($(event.target).text());
+          this.calcArr.push($(event.target).text());
       }
       view.updateDisplay(this.calcArr.join(' '));
     } else {
@@ -260,8 +260,15 @@ var Model = function(){
       });
 
       $('.h-row.button').dblclick(view.loadFromHistory.bind(view));
+      $('#info-button').click(function(){
+        $('.modal-curtain').show('fast');
+        $('.modal-body').show('slow');
+      });
+      $('.modal-close').click(function(){
+        $('.modal-curtain').hide('hide');
+        $('.modal-body').hide('slow');
+      });
     }
-
 
 
     this.checkAddOrSubtract = function(element){
@@ -337,18 +344,19 @@ var Model = function(){
 
     this.loadFromHistory = function(){
       var item = $(event.target).text();
-      if (this.model.historyType === 'calc'){
-        this.model.calcArr = item.split(' ');
-        this.updateDisplay(item);
-      } else {
-        if (isNaN(this.model.calcArr[this.model.calcArr.length - 1])){
-          this.model.calcArr.push(item);
+      if (item.length > 0){
+        if (this.model.historyType === 'calc'){
+          this.model.calcArr = item.split(' ');
+          this.updateDisplay(item);
         } else {
-          this.model.calcArr[this.model.calcArr.length - 1] = item;
+          if (isNaN(this.model.calcArr[this.model.calcArr.length - 1])){
+            this.model.calcArr.push(item);
+          } else {
+            this.model.calcArr[this.model.calcArr.length - 1] = item;
+          }
+          view.updateDisplay(this.model.calcArr.join(' '));
         }
-        view.updateDisplay(this.model.calcArr.join(' '));
       }
-
     }
 
     this.buildCalcHistory = function(){
