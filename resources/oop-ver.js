@@ -250,10 +250,12 @@ var Model = function(){
       $('.ext').on('click',function(){
         if ($('.secondary-body').css('visibility') === 'hidden'){
           $(event.target).text('>>');
+          $('#info-button').css({'visibility':'visible','opacity':'1'});
           $('.secondary-body').css({'visibility':'visible','opacity':'1'});
           $('.history-container').css({'visibility':'visible','opacity':'1'});
         } else {
           $(event.target).text('<<');
+          $('#info-button').css({'visibility':'hidden','opacity':'0'});
           $('.secondary-body').css({'visibility':'hidden','opacity':'0'});
           $('.history-container').css({'visibility':'hidden','opacity':'0'});
         }

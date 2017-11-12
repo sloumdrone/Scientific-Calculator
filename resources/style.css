@@ -193,7 +193,6 @@ div span:hover {
   position: fixed;
   background-color: rgba(0,0,0,0.3);
   cursor: default;
-  transition-duration: 0.75s;
 }
 
 .modal-close {
@@ -209,8 +208,8 @@ div span:hover {
 }
 
 .modal-body {
-  width: 60%;
-  height: 80%;
+  width: 65vw;
+  height: 80vh;
   font-size: 1rem;
   margin: 0;
   padding: 0;
@@ -231,6 +230,8 @@ div span:hover {
   overflow: hidden;
   padding: 1%;
   text-align: center;
+  height: 10vh;
+  width: 100%;
 }
 
 .modal-content {
@@ -241,28 +242,30 @@ div span:hover {
   padding: 5%;
   height: 95%;
   line-height: 1.5;
+  height: 70vh;
+  width: 100%;
 }
 
 #info-button {
+  transition: visibility 1s, opacity 1s;
+  visibility: hidden;
   padding: 10px 20px;
-  margin: 1% auto;
+  margin: 0 auto;
   background-color: #cef8ff;
   color: grey;
   cursor: pointer;
   user-select: none;
-  display: block;
   text-align: center;
   font-size: 1.15rem;
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
+  opacity: 0;
+  top: 27%;
+  left: 5%;
   position: absolute;
   border: 3px solid gray;
-  transition-duration: 0.25s;
   box-shadow: 0px 0px 0px transparent;
 }
 
 #info-button:hover {
-  top: 80.10%;
+  top: 27.1%;
   box-shadow: 0px 2px 6px slategray;
 }
