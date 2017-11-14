@@ -20,14 +20,15 @@ var Model = function(){
   this.calcHistory = [];
   this.canDecimal = true;
   this.calcPressed = false;
-  this.historyType = 'calc';
+  this.historyType = 'Ans';
 
-  this.handleOpClicks = function(){
+  this.handleOpClicks = function(event){
     this.calcPressed = false;
     if (this.calcArr[0]){
       if (isNaN(this.calcArr[this.calcArr.length-1]) && this.calcArr[0] !== 'ERROR'){
           this.calcArr[this.calcArr.length-1] = $(event.target).text();
       } else if (this.calcArr[0] !== 'ERROR'){
+          this.calcArr[this.calcArr.length-1] = Number(this.calcArr[this.calcArr.length-1]);
           this.calcArr.push($(event.target).text());
       }
       view.updateDisplay(this.calcArr.join(' '));
@@ -37,7 +38,7 @@ var Model = function(){
     this.canDecimal = true;
   }
 
-  this.handleNumClicks = function() {
+  this.handleNumClicks = function(event) {
     //start new calc if num was pressed after equals without an op first
     if (this.calcPressed){
       this.calcArr = [];
@@ -72,7 +73,7 @@ var Model = function(){
     view.updateDisplay(this.calcArr.join(' '));
   }
 
-  this.handleFunctions = function(){
+  this.handleFunctions = function(event){
     this.calcPressed = false;
 
     if (!isNaN(this.calcArr[this.calcArr.length-1])){
@@ -85,7 +86,7 @@ var Model = function(){
     this.canDecimal = true;
   }
 
-  this.handleFlip = function(){
+  this.handleFlip = function(event){
     if (this.calcArr[0]){
         if (!isNaN(this.calcArr[this.calcArr.length-1])){
           this.calcArr[this.calcArr.length-1] = Number(this.calcArr[this.calcArr.length-1]) * -1;
@@ -95,7 +96,7 @@ var Model = function(){
   }
 
 
-  this.handleDecClicks = function(){
+  this.handleDecClicks = function(event){
     this.calcPressed = false;
     if (!isNaN(this.calcArr[this.calcArr.length-1]) && this.canDecimal){
       this.calcArr[this.calcArr.length-1] += '.';
@@ -107,14 +108,14 @@ var Model = function(){
     view.updateDisplay(this.calcArr.join(' '));
   }
 
-  this.handleHistoryType = function(){
-    if (this.historyType === 'calc'){
-      this.historyType = 'ans';
-      $(event.target).text('ans');
+  this.handleHistoryType = function(event){
+    if (this.historyType === 'Calc'){
+      this.historyType = 'Ans';
+      $(event.target).text('Ans');
       view.buildAnswerHistory();
     } else {
-      this.historyType = 'calc';
-      $(event.target).text('calc');
+      this.historyType = 'Calc';
+      $(event.target).text('Calc');
       view.buildCalcHistory();
     }
   }
@@ -213,7 +214,7 @@ var Model = function(){
   }
 
 
-  this.clearCalc = function(){
+  this.clearCalc = function(event){
     this.canDecimal = true;
     this.calcPressed = false;
     if ($(event.target).text() === 'AC'){
@@ -245,31 +246,141 @@ var Model = function(){
       $('.calc').on('click',this.model.handleCalc.bind(this.model));
       $('.clr').on('click',this.model.clearCalc.bind(this.model));
       $('.fun').on('click',this.model.handleFunctions.bind(this.model));
-      $('div span').on('click',this.model.handleHistoryType.bind(this.model));
+      $('#info-button2').on('click',this.model.handleHistoryType.bind(this.model));
       $('.flip').on('click',this.model.handleFlip.bind(this.model));
-      $('.ext').on('click',function(){
+      $('body').on('keypress',this.handleKeyInput);
+      $('.ext').on('click',function(event){
         if ($('.secondary-body').css('visibility') === 'hidden'){
           $(event.target).text('>>');
-          $('#info-button').css({'visibility':'visible','opacity':'1'});
-          $('.secondary-body').css({'visibility':'visible','opacity':'1'});
-          $('.history-container').css({'visibility':'visible','opacity':'1'});
+          $('#info-button').css({'visibility':'visible','left':'33px'});
+          $('#info-button2').css({'visibility':'visible','right':'33px'});
+          $('.secondary-body').css({'visibility':'visible','left':'0px'});
+          $('.history-container').css({'visibility':'visible','left':'0px'});
         } else {
           $(event.target).text('<<');
-          $('#info-button').css({'visibility':'hidden','opacity':'0'});
-          $('.secondary-body').css({'visibility':'hidden','opacity':'0'});
-          $('.history-container').css({'visibility':'hidden','opacity':'0'});
+          $('#info-button').css({'visibility':'hidden','left':'233px'});
+          $('#info-button2').css({'visibility':'hidden','right':'233px'});
+          $('.secondary-body').css({'visibility':'hidden','left':'200px'});
+          $('.history-container').css({'visibility':'hidden','left':'-200px'});
         }
       });
 
       $('.h-row.button').dblclick(view.loadFromHistory.bind(view));
-      $('#info-button').click(function(){
+      $('#info-button').click(function(event){
         $('.modal-curtain').show('fast');
         $('.modal-body').show('slow');
       });
-      $('.modal-close').click(function(){
-        $('.modal-curtain').hide('hide');
-        $('.modal-body').hide('slow');
+      $('.modal-close').click(function(event){
+        $('.modal-curtain').hide('slow');
+        $('.modal-body').hide('fast');
       });
+    }
+
+    this.handleKeyInput = function(){
+      switch (event.charCode){
+        case 65: // AC - 'A'
+        case 97: // AC - 'a'
+          $('.calc-body .row:nth-child(2) .clr:first-child').click();
+          break;
+        case 67: // C - 'C'
+        case 99: // C - 'c'
+          $('.calc-body .row:nth-child(2) .clr:nth-child(2)').click();
+          break;
+        case 94: // ^
+          $('.secondary-body .row:last-child .op:first-child').click();
+          break;
+        case 47: // /
+          $('.calc-body .row:nth-child(2) .op:nth-child(4)').click();
+          break;
+        case 55: // 7
+          $('.calc-body .row:nth-child(3) .num:first-child').click();
+          break;
+        case 56: // 8
+          $('.calc-body .row:nth-child(3) .num:nth-child(2)').click();
+          break;
+        case 57: // 9
+          $('.calc-body .row:nth-child(3) .num:nth-child(3)').click();
+          break;
+        case 88: // X
+        case 120: // x X *
+        case 42: // x X *
+          $('.calc-body .row:nth-child(3) .op').click();
+          break;
+        case 52: // 4
+          $('.calc-body .row:nth-child(4) .num:first-child').click();
+          break;
+        case 53: // 5
+          $('.calc-body .row:nth-child(4) .num:nth-child(2)').click();
+          break;
+        case 54: // 6
+          $('.calc-body .row:nth-child(4) .num:nth-child(3)').click();
+          break;
+        case 43: // +
+          $('.calc-body .row:nth-child(4) .op').click();
+          break;
+        case 49: // 1
+          $('.calc-body .row:nth-child(5) .num:first-child').click();
+          break;
+        case 50: // 2
+          $('.calc-body .row:nth-child(5) .num:nth-child(2)').click();
+          break;
+        case 51: // 3
+          $('.calc-body .row:nth-child(5) .num:nth-child(3)').click();
+          break;
+        case 45: // -
+          $('.calc-body .row:nth-child(5) .op').click();
+          break;
+        case 102: // +/- - 'f'
+          $('.calc-body .row:nth-child(6) .flip').click();
+          break;
+        case 48: // 0
+          $('.calc-body .row:nth-child(6) .num').click();
+          break;
+        case 46: // .
+          $('.calc-body .row:nth-child(6) .dec').click();
+          break;
+        case 13: // =
+        case 61: // =
+          $('.calc-body .row:nth-child(6) .calc').click();
+          break;
+        case 60:
+        case 62: // expand calc body - < or >
+          $('.calc-body .row:nth-child(6) .ext').click();
+          break;
+        case 115: //sin - s
+          $('.secondary-body .row:nth-child(1) .fun:nth-child(1)').click();
+          break;
+        case 100: // cos - c
+          $('.secondary-body .row:nth-child(1) .fun:nth-child(2)').click();
+          break;
+        case 116: //tan - t
+          $('.secondary-body .row:nth-child(2) .fun:nth-child(1)').click();
+          break;
+        case 113: // sqrt - q
+          $('.secondary-body .row:nth-child(2) .fun:nth-child(2)').click();
+          break;
+        case 112: //pi - p
+          $('.secondary-body .row:nth-child(3) .num:nth-child(1)').click();
+          break;
+        case 101: // E - e
+          $('.secondary-body .row:nth-child(3) .num:nth-child(2)').click();
+          break;
+        case 108: // log - l
+          $('.secondary-body .row:nth-child(4) .fun').click();
+          break;
+        case 63: // user info - ?
+          $('#info-button').click();
+          break;
+        case 91: // close user info - [
+          $('.modal-close').click();
+          break;
+        case 104: // toggle hishtory mode - h
+          $('#info-button2').click();
+          break;
+        case 161: // double click top history item - alt-1
+          $('.history-container div:nth-child(2)').dblclick();
+          break;
+      }
     }
 
 
@@ -344,7 +455,7 @@ var Model = function(){
       $('.display').text(value);
     }
 
-    this.loadFromHistory = function(){
+    this.loadFromHistory = function(event){
       var item = $(event.target).text();
       if (item.length > 0){
         if (this.model.historyType === 'calc'){
