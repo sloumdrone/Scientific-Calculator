@@ -20,7 +20,7 @@ var Model = function(){
   this.calcHistory = [];
   this.canDecimal = true;
   this.calcPressed = false;
-  this.historyType = 'Ans';
+  this.historyType = 'ans';
 
   this.handleOpClicks = function(event){
     this.calcPressed = false;
@@ -109,12 +109,12 @@ var Model = function(){
   }
 
   this.handleHistoryType = function(event){
-    if (this.historyType === 'Calc'){
-      this.historyType = 'Ans';
+    if (this.historyType === 'calc'){
+      this.historyType = 'ans';
       $(event.target).text('Ans');
       view.buildAnswerHistory();
     } else {
-      this.historyType = 'Calc';
+      this.historyType = 'calc';
       $(event.target).text('Calc');
       view.buildCalcHistory();
     }
@@ -141,8 +141,11 @@ var Model = function(){
     }
 
     //write to history
-    var historyItem = [[this.calcArr.join(' ')],[]]
-    this.calcHistory.unshift(historyItem);
+    if (this.calcArr.length > 0){
+      var historyItem = [this.calcArr.join(' ')]
+      this.calcHistory.unshift(historyItem);
+    }
+
 
     return this.runCalc();
   }
@@ -201,7 +204,7 @@ var Model = function(){
       if (this.calcArr[0] === Infinity){
         this.calcArr[0] = 'ERROR';
       }
-      this.calcHistory[0][1].push(this.calcArr[0]);
+      this.calcHistory[0].push(this.calcArr[0]);
       if (this.historyType === 'calc'){
           view.buildCalcHistory();
       } else {
