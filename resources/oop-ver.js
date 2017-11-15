@@ -146,7 +146,6 @@ var Model = function(){
       this.calcHistory.unshift(historyItem);
     }
 
-
     return this.runCalc();
   }
 
