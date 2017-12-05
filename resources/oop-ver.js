@@ -269,12 +269,13 @@ var Model = function(){
 
       $('.h-row.button').dblclick(view.loadFromHistory.bind(view));
       $('#info-button').click(function(event){
-        $('.modal-curtain').show('fast');
-        $('.modal-body').show('slow');
+        $('.modal-curtain').slideDown('slow');
+        $('.modal-body').slideDown('slow');
       });
       $('.modal-close').click(function(event){
-        $('.modal-curtain').hide('slow');
-        $('.modal-body').hide('fast');
+        $('.modal-body').slideUp('slow');
+        $('.modal-curtain').slideUp('slow');
+
       });
     }
 
