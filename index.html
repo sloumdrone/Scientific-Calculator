@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Calculator</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="./resources/main.js"></script>
+  <link rel="stylesheet" href="./resources/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div id="info-button">User Guide</div>
+    <div class="secondary-body">
+      <div class="row">
+        <div class="fun button2">sin:</div>
+        <div class="fun button2">cos:</div>
+      </div>
+      <div class="row">
+        <div class="fun button2">tan:</div>
+        <div class="fun button2">√:</div>
+      </div>
+      <div class="row">
+        <div class="num button2">π</div>
+        <div class="num button2">E</div>
+      </div>
+      <div class="row">
+        <div class="op button2">^</div>
+        <div class="fun button2">log:</div>
+      </div>
+    </div>
+    <div class="calc-body">
+      <div class="calc-row">
+        <div class="display">0</div>
+      </div>
+      <div class="row">
+        <div class="clr button">AC</div>
+        <div class="clr button">C</div>
+        <div class="flip button">+/-</div>
+        <div class="op button">/</div>
+      </div>
+      <div class="row">
+        <div class="num button">7</div>
+        <div class="num button">8</div>
+        <div class="num button">9</div>
+        <div class="op button">x</div>
+      </div>
+      <div class="row">
+        <div class="num button">4</div>
+        <div class="num button">5</div>
+        <div class="num button">6</div>
+        <div class="op button">+</div>
+      </div>
+      <div class="row">
+        <div class="num button">1</div>
+        <div class="num button">2</div>
+        <div class="num button">3</div>
+        <div class="op button">-</div>
+      </div>
+      <div class="row">
+        <div class="ext button"><<</div>
+        <div class="num button">0</div>
+        <div class="dec button">.</div>
+        <div class="calc button">=</div>
+      </div>
+    </div>
+
+    <div class="history-container">
+      <div class="title-row">History</div>
+      <div class="h-row button"></div>
+      <div class="h-row button"></div>
+      <div class="h-row button"></div>
+      <div class="h-row button"></div>
+      <div class="h-row button"></div>
+      <div class="h-row button"></div>
+      <div class="h-row button"></div>
+    </div>
+    <div id="info-button2" title="Click to toggle between solutions (ans) and problems (calc). Double click either, to insert into display in various ways (see instructions).">Ans</div>
+  </div>
+
+  <div class="modal-curtain">
+
+    <div class="modal-body">
+      <div class="title-bar"><h2>Calculator Usage Instructions</h2><div class="modal-close">X</div></div>
+      <div class="modal-content">
+        <p>This calculator has been designed for both basic usage and scientific calculation. It is functions first (executing from right to left to allow for function nesting), and then follows p.e.m.d.a.s. from left to right.</p>
+        <p>
+          <ul>
+            <li>Advanced operations can be viewed by clicking <strong><<</strong> and closed by clicking <strong>>></strong>.</li>
+            <li>Opening operators are not recognized, with the exception of functions.</li>
+            <li>To swap sign (go from positive to negative or vice versa) enter a number and then press the <strong>+/-</strong> key.</li>
+            <li>Decimals can only be pressed once per number, but can be used as the opening key press for a number.</li>
+            <li>Pressing an operator key after an operator was just input will update the operator to the most recently pressed operator key.</li>
+            <li>Pressing a function key after another function key will nest the most recent function inside of the previous function. The calculation will bubble from in to out.</li>
+            <li>Terminal operators will cause all calculations before the operator to be repeated after the operator as well and the total of all calculations will be returned.</li>
+            <li>History
+              <ul>
+                <li>History has two modes. These modes can be toggled by clicking in the top right of the history box on either <strong>calc</strong> or <strong>ans</strong>.</li>
+                <li>When in <strong>calc</strong> mode the history section will contain calculation strings that you have previously executed. Double clicking one will place it in the display and allow you to add to or change the calculation string.</li>
+                <li>When in <strong>ans</strong> mode the history section will contain previous solutioins. If the last item in the display is an operator, double clicking on a history solution will add it after the operator. If the last item in the display is a number, double clicking on a history solution will replace the display number with the history solution number.</li>
+                <li>Using the ans history recall allows for a form of parenthetical usage. For example: calculate <strong>PI / 2</strong> and get the result. Then press <strong>sin:</strong> and double click on the result of <strong>PI / 2</strong> in the history answers section. Pressing equals will give you a return value of 1 (the correct answer). While inputing <strong>sin: PI / 2</strong> will execute the function before the division, which is not generally the intended calculation. Good usage of the history will allow for most usage.</li>
+                <li>History will store the last seven calculations with the most recent at the top.</li>
+              </ul>
+            </li>
+            <li>Key Control
+              <ul>
+                <li><strong>(#)</strong> The relevant number</li>
+                <li><strong>(A)</strong> Clear all</li>
+                <li><strong>(a)</strong> Clear all</li>
+                <li><strong>(C)</strong> Clear last</li>
+                <li><strong>(c)</strong> Clear last</li>
+                <li><strong>(x)</strong> Multiply</li>
+                <li><strong>(X)</strong> Multiply</li>
+                <li><strong>(*)</strong> Multiply</li>
+                <li><strong>(/)</strong> Divide</li>
+                <li><strong>(+)</strong> Addition</li>
+                <li><strong>(-)</strong> Subtraction</li>
+                <li><strong>(^)</strong> Exponentiation</li>
+                <li><strong>(.)</strong> Decimal</li>
+                <li><strong>(=)</strong> Equals/Calculate</li>
+                <li><strong>(Enter)</strong> Equals/Calculate</li>
+                <li><strong>(<)</strong> Open extended functionality</li>
+                <li><strong>(>)</strong> Close extended functionality</li>
+                <li><strong>(s)</strong> Sin</li>
+                <li><strong>(d)</strong> Cos</li>
+                <li><strong>(t)</strong> Tan</li>
+                <li><strong>(q)</strong> Square Root</li>
+                <li><strong>(p)</strong> PI</li>
+                <li><strong>(e)</strong> E</li>
+                <li><strong>(l)</strong> Log</li>
+                <li><strong>(?)</strong> Open user Guide</li>
+                <li><strong>([)</strong> Close user guide</li>
+                <li><strong>(h)</strong> Toggle hishtory mode</li>
+                <li><strong>(alt-1)</strong> recall most recent history item</li>
+              </ul>
+            </li>
+          </ul>
+        </p>
+        <p>This calculator was designed and implemented in November of 2017 by Brian Evans.</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
