@@ -23,30 +23,30 @@ This scientific calculator has been designed for both basic usage and scientific
   * History will store the last seven calculations with the most recent at the top
 
 ### Key Control
-  * **#** - The relevant number
-  * **A | a** - Clear all
-  * **C | c** - Clear last
-  * **X | x** - Multiply
-  * **/** - Divide
-  * **+** - Addition
-  * **-** - Subtraction
-  * **^** - Exponentiation
-  * **.** - Decimal
-  * **=** - Equals/Calculate
-  * **Enter** - Equals/Calculate
-  * **<** - Open extended functionality
-  * **>** - Close extended functionality
-  * **s** - Sin
-  * **d** - Cos
-  * **t** - Tan
-  * **q** - Square Root
-  * **p** - PI
-  * **e** - E
-  * **l** - Log
-  * **?** - Open user Guide
-  * **\[** - Close user guide
-  * **h** - Toggle hishtory mode
-  * **alt-1** - Recall most recent history item (answer or problem, whichever is active)
+  * (**#**) The relevant number
+  * (**A or a**) Clear all
+  * (**C or c**) Clear last
+  * (**X or x**) Multiply
+  * (**/**) Divide
+  * (**+**) Addition
+  * (**-**) Subtraction
+  * (**^**) Exponentiation
+  * (**.**) Decimal
+  * (**=**) Equals/Calculate
+  * (**enter**) Equals/Calculate
+  * (**<**) Open extended functionality
+  * (**>**) Close extended functionality
+  * (**s**) Sin
+  * (**d**) Cos
+  * (**t**) Tan
+  * (**q**) Square Root
+  * (**p**) PI
+  * (**e**) E
+  * (**l**) Log
+  * (**?**) Open user Guide
+  * (**\[**) Close user guide
+  * (**h**) Toggle hishtory mode
+  * (**alt-1**) Recall most recent history item (answer or problem, whichever is active)
 
 
 
