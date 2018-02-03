@@ -2,7 +2,7 @@
 
 ## Requirements
 All that is required is an internet connection and a semi-recent browser. 
-The calculator utilizes, jQuery, JavaScript, HTML, CSS.
+The calculator utilizes jQuery, JavaScript, HTML, CSS.
 
 ## Operation
 This scientific calculator has been designed for both basic usage and scientific calculation. It is functions first (executing from right to left to allow for function nesting), and then follows p.e.m.d.a.s. from left to right.
